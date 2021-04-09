@@ -1,5 +1,12 @@
+import kotlinVideo.KotlinVideo
 import kotlinx.browser.document
+import kotlinx.css.*
+import react.dom.*
+import styled.css
+import styled.styledDiv
 
 fun main() {
-    document.bgColor = "blue"
+    render(document.getElementById("root")) {
+        child(App::class) {}
+    }
 }
