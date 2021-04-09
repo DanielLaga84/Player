@@ -17,6 +17,8 @@ external interface VideoListProps : RProps {
 
 external interface AppState : RState {
     var currentVideo: Video?
+    var unwatchedVideos: List<Video>
+    var watchedVideos: List<Video>
 }
 
 fun RBuilder.videoList(handler: VideoListProps.() -> Unit): ReactElement {
