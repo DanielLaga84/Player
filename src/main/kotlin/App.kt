@@ -1,7 +1,4 @@
-import kotlinVideo.AppState
-import kotlinVideo.KotlinVideo
-import kotlinVideo.VideoList
-import kotlinVideo.videoList
+import kotlinVideo.*
 import kotlinx.css.*
 import react.*
 import react.dom.*
@@ -38,23 +35,20 @@ class App : RComponent<RProps, AppState>() {
 
         styledDiv {
             css {
-                gridAutoColumns
                 position = Position.absolute
                 top = 10.px
                 right = 10.px
             }
 
-            h3 {
-                +"John Doe: Building and breaking things"
-            }
-            img {
-                attrs {
-                    src = "https://via.placeholder.com/640x360.png?text=Video+Player+Placeholder"
+            state.currentVideo?.let { currentVideo ->
+                videoPlayer {
+                    video = currentVideo
                 }
+            }
             }
         }
     }
-}
+
 
 val unwatchedVideos = listOf(
     KotlinVideo(1, "Building and breaking things", "John Doe", "https://youtu.be/PsaFVLr8t4E"),
