@@ -1,4 +1,5 @@
 import kotlinVideo.KotlinVideo
+import kotlinVideo.VideoList
 import kotlinx.css.*
 import react.RBuilder
 import react.RComponent
@@ -8,28 +9,29 @@ import react.dom.*
 import styled.css
 import styled.styledDiv
 
+@ExperimentalJsExport
 @JsExport
 class App : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
         h1 {
         +"KotlinConf Explorer"
     }
-        div{
+        div {
             h3 {
                 +"Videos to watch"
             }
-            for( video in unwatchedVideos) {
-                p {
-                    +"${video.speaker}: ${video.title}: ${video.videoURL}"
-                }
+            child(VideoList::class) {
+                attrs.videos = unwatchedVideos
+            }
+
             }
             h3 {
                 +"Videos watched"
             }
-            p {
-                +"Tom Jerry: Mouseless development"
+            child(VideoList::class) {
+                attrs.videos = watchedVideos
             }
-        }
+
         styledDiv{
             css{
                 gridAutoColumns
