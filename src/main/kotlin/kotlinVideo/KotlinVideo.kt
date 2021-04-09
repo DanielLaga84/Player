@@ -1,6 +1,6 @@
 package kotlinVideo
 
-external interface Video{
+external interface Video {
     val id: Int
     val title: String
     val speaker: String
