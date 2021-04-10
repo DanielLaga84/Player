@@ -20,6 +20,7 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
     override fun RBuilder.render() {
         styledDiv {
             css {
+                minWidth = 600.px
                 position = Position.absolute
                 top = 10.px
                 right = 10.px
@@ -30,7 +31,7 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
             styledButton {
                 css {
                     display = Display.block
-                    backgroundColor = if(props.unwatchedVideo) Color.lightGreen else Color.red
+                    backgroundColor = if (props.unwatchedVideo) Color.lightGreen else Color.red
                 }
                 attrs {
                     onClickFunction = {
@@ -39,16 +40,15 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                 }
                 if (props.unwatchedVideo) {
                     +"Mark as watched"
-                }
-                else {
-                +"Mark as unwatched"
+                } else {
+                    +"Mark as unwatched"
                 }
             }
             styledDiv {
                 css {
                     display = Display.flex
                     marginBottom = 10.px
-            }
+                }
                 emailShareButton {
                     attrs.url = props.video.videoURL
                     emailIcon {
@@ -64,13 +64,13 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                     }
                 }
             }
-            reactPlayer {
-                attrs.url = props.video.videoURL
+                reactPlayer {
+                    attrs.url = props.video.videoURL
                 }
             }
         }
-    }
 
+}
 
 fun RBuilder.videoPlayer(handler: VideoPlayerProps.() -> Unit): ReactElement {
     return child(VideoPlayer::class) {
