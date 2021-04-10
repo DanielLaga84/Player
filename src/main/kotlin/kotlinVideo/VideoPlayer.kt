@@ -24,12 +24,26 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                 top = 10.px
                 right = 10.px
             }
+            emailShareButton {
+                attrs.url = props.video.videoURL
+                emailIcon {
+                    attrs.size = 32
+                    attrs.round = true
+                }
+            }
+            telegramShareButton {
+                attrs.url = props.video.videoURL
+                telegramIcon {
+                    attrs.size = 32
+                    attrs.round = true
+                }
+            }
             h3 {
                 +"${props.video.speaker}: ${props.video.title}"
             }
             styledButton {
                 css {
-                    display = Display.block
+                    display = Display.flex
                     backgroundColor = if(props.unwatchedVideo) Color.lightGreen else Color.red
                 }
                 attrs {
@@ -44,14 +58,13 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                 +"Mark as unwatched"
                 }
             }
-            img {
-                attrs {
-                    src = "https://via.placeholder.com/640x360.png?text=Video+Player+Placeholder"
+            reactPlayer {
+                attrs.url = props.video.videoURL
                 }
             }
         }
     }
-}
+
 
 fun RBuilder.videoPlayer(handler: VideoPlayerProps.() -> Unit): ReactElement {
     return child(VideoPlayer::class) {

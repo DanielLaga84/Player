@@ -18,10 +18,15 @@ class App : RComponent<RProps, AppState>() {
     }
 
     override fun RBuilder.render() {
+        styledDiv  {
+            css {
+                position = Position.sticky
+                top = 10.px
+                right = 10.px
+            }
         h1 {
             +"KotlinConf Explorer"
         }
-        div {
             h3 {
                 +"Videos to watch"
             }
