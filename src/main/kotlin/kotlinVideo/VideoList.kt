@@ -21,12 +21,6 @@ external interface AppState : RState {
     var watchedVideos: List<Video>
 }
 
-fun RBuilder.videoList(handler: VideoListProps.() -> Unit): ReactElement {
-    return child(VideoList::class) {
-        this.attrs(handler)
-    }
-}
-
 @JsExport
 class VideoList : RComponent<VideoListProps, RState>() {
     override fun RBuilder.render() {
@@ -36,14 +30,18 @@ class VideoList : RComponent<VideoListProps, RState>() {
                 attrs {
                     onClickFunction = {
                         props.onSelectVideo(video)
-
                     }
                 }
                 if (video == props.selectedVideo) {
                     +"▶  "
                 }
-                +"${video.speaker}: ${video.title}: ${video.videoURL}"
+                +"${video.speaker}: ${video.title}"
             }
         }
+    }
+}
+fun RBuilder.videoList(handler: VideoListProps.() -> Unit): ReactElement {
+    return child(VideoList::class) {
+        this.attrs(handler)
     }
 }

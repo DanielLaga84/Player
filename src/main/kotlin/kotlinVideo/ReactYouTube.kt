@@ -7,8 +7,8 @@ import react.RClass
 import react.RProps
 
 @JsName("ReactYouTubeLite")
-external val reactPlayer: RClass<dynamic>
+external val reactPlayer: RClass<ReactYouTubeProps>
 
 external interface ReactYouTubeProps : RProps {
-    val url : String
+    var url: String
 }

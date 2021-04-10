@@ -28,55 +28,57 @@ class App : RComponent<RProps, AppState>() {
         watchedVideos = listOf()
 
         val mainScope = MainScope()
-        mainScope.launch { val videos = fetchVideos()
-        setState {
-            unwatchedVideos = videos
-        }}
+        mainScope.launch {
+            val videos = fetchVideos()
+            setState {
+                unwatchedVideos = videos
+            }
+        }
     }
+
     override fun RBuilder.render() {
+        h1 {
+            +"KotlinConf Explorer"
+        }
+        h3 {
+            +"Videos to watch"
+        }
+        videoList {
+            videos = state.unwatchedVideos
+            selectedVideo = state.currentVideo
+            onSelectVideo = { video -> setState { currentVideo = video } }
 
-            h1 {
-                +"KotlinConf Explorer"
-            }
-            h3 {
-                +"Videos to watch"
-            }
-            videoList {
-                videos = state.unwatchedVideos
-                selectedVideo = state.currentVideo
-                onSelectVideo = { video -> setState { currentVideo = video } }
+        }
 
-            }
+        h3 {
+            +"Videos watched"
+        }
+        videoList {
+            videos = state.watchedVideos
+            selectedVideo = state.currentVideo
+            onSelectVideo = { video -> setState { currentVideo = video } }
+        }
 
-            h3 {
-                +"Videos watched"
-            }
-            videoList {
-                videos = state.watchedVideos
-                selectedVideo = state.currentVideo
-                onSelectVideo = { video -> setState { currentVideo = video } }
-            }
-
-            state.currentVideo?.let { currentVideo ->
-                videoPlayer {
-                    video = currentVideo
-                    unwatchedVideo = currentVideo in state.unwatchedVideos
-                    onWatchedButtonPressed = {
-                        if (video in state.unwatchedVideos) {
-                            setState {
-                                unwatchedVideos -= video
-                                watchedVideos += video
-                            }
-                        } else {
-                            setState {
-                                watchedVideos -= video
-                                unwatchedVideos += video
-                            }
+        state.currentVideo?.let { currentVideo ->
+            videoPlayer {
+                video = currentVideo
+                unwatchedVideo = currentVideo in state.unwatchedVideos
+                onWatchedButtonPressed = {
+                    if (video in state.unwatchedVideos) {
+                        setState {
+                            unwatchedVideos -= video
+                            watchedVideos += video
+                        }
+                    } else {
+                        setState {
+                            watchedVideos -= video
+                            unwatchedVideos += video
                         }
                     }
                 }
             }
         }
+    }
 
 }
 
